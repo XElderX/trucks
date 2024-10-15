@@ -16,7 +16,7 @@ class CreateTruckSubunitsTable extends Migration
             $table->date('end_date');
             $table->timestamps();
 
-            $table->unique(['main_truck_id', 'subunit_truck_id', 'start_date', 'end_date'], 'unique_subunit_assignment');
+            $table->unique(['main_truck_id', 'subunit_truck_id'], 'unique_subunit_assignment');
         });
     }
 
