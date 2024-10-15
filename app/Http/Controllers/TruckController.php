@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddSubunitRequest;
 use App\Http\Requests\StoreTruckRequest;
 use App\Http\Requests\UpdateTruckRequest;
 use App\Models\Truck;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class TruckController extends Controller
@@ -74,5 +76,33 @@ class TruckController extends Controller
         $truck = Truck::findOrFail($id);
         $truck->delete();
         return response()->json(null, 204);
+    }
+
+    /**
+     * Store a newly created subunit in storage.
+     *
+     * @param \Illuminate\Http\AddSubunitRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addSubunit(AddSubunitRequest $request): JsonResponse
+    {
+        $mainTruck = Truck::findOrFail($request->main_truck);
+        $subunitId = $mainTruck->addSubunit($request);
+        
+
+        return response()->json(['message' => 'Subunit added successfully'], 201);
+    }
+
+    /**
+     * List subunits for a specific truck.
+     *
+     * @param string $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function listSubunits(string $id): JsonResponse
+    {
+        $truck = Truck::with('subunits')->findOrFail($id);
+
+        return response()->json($truck->subunits()->get());
     }
 }
