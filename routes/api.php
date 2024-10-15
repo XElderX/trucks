@@ -14,4 +14,7 @@ Route::group(['prefix' => 'trucks'], function () {
     Route::get('/{id}', [TruckController::class, 'read']);
     Route::put('/{id}', [TruckController::class, 'update']);
     Route::delete('/{id}', [TruckController::class, 'delete']);
+
+    Route::post('/subunit', [TruckController::class, 'addSubunit']);
+    Route::get('/{id}/subunits', [TruckController::class, 'listSubunits']);
 });
