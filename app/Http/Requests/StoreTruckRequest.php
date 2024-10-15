@@ -6,16 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTruckRequest extends FormRequest
 {
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules(): array
     {
         return [
@@ -23,5 +18,12 @@ class StoreTruckRequest extends FormRequest
             'year'        => 'required|integer|min:1900|max:' . (date('Y') + 5),
             'notes'       => 'nullable|string',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        throw new \Illuminate\Http\Exceptions\HttpResponseException(
+            response()->json(['errors' => $validator->errors()], 422)
+        );
     }
 }

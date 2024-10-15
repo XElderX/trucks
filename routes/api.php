@@ -11,6 +11,7 @@ Route::get('/user', function (Request $request) {
 Route::group(['prefix' => 'trucks'], function () {
     Route::get('/', [TruckController::class, 'browse']);
     Route::post('/', [TruckController::class, 'create']);
-    Route::put('/{id}', [TruckController::class, 'update']);  // Use PUT or PATCH for updates
+    Route::get('/{id}', [TruckController::class, 'read']);
+    Route::put('/{id}', [TruckController::class, 'update']);
     Route::delete('/{id}', [TruckController::class, 'delete']);
 });
