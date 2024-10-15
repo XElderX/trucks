@@ -5,9 +5,9 @@ This is a Laravel-based web application for managing trucks. It allows users to 
 
 ## Features
 - **CRUD Operations for Trucks**
-  - Unit Number (required)
-  - Year of Registration (required, must be between 1900 and 5 years from now)
-  - Notes (optional)
+  - Unit Number 
+  - Year of Registration
+  - Notes
 
 - **Subunit Management**
   - Assign subunits to trucks with:
@@ -20,14 +20,25 @@ This is a Laravel-based web application for managing trucks. It allows users to 
     - Subunit date ranges do not overlap.
     - A truck cannot be assigned as a subunit while it is already a subunit for another truck.
 
-## Requirements
-- PHP >= 8.1
-- Composer
-- Laravel >= 10
-- MySQL or another database supported by Laravel
-
 ## Installation
 
-### 1. Clone the Repository
+###
+
 ```bash
 git clone https://github.com/XElderX/trucks.git
+
+composer install
+cp .env.example .env
+
+set up .env file
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=trucks_db
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+php artisan key:generate
+php artisan migrate
+php artisan serve
+

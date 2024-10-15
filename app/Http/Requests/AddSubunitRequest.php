@@ -14,7 +14,7 @@ class AddSubunitRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // Change this according to your authorization logic
+        return true; 
     }
 
     /**
