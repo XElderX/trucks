@@ -26,6 +26,7 @@ This is a Laravel-based web application for managing trucks. It allows users to 
 
 ```bash
 git clone https://github.com/XElderX/trucks.git
+cd trucks
 
 composer install
 cp .env.example .env
@@ -41,4 +42,6 @@ DB_PASSWORD=your_password
 php artisan key:generate
 php artisan migrate
 php artisan serve
+php artisan route:list // to check api routes that can be uset to test api via postman 
+
 
